@@ -3,13 +3,12 @@
     {
         public static function register()
         {
-            ini_set('session.save_handler', 'user');
             session_set_save_handler(array('DBSession', 'open'), array('DBSession', 'close'), array('DBSession', 'read'), array('DBSession', 'write'), array('DBSession', 'destroy'), array('DBSession', 'gc'));
         }
 
         public static function open()
         {
-            $db = Database::getDatabase();
+            $db = Database::getDatabase(true);
             return $db->isConnected();
         }
 
